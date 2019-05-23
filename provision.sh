@@ -2,6 +2,10 @@ sudo apt update && sudo apt upgrade -y
 
 sudo apt install build-essential -y
 
+wget https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz && tar xzvf pcre-8.40.tar.gz
+wget http://www.zlib.net/zlib-1.2.11.tar.gz && tar xzvf zlib-1.2.11.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.0f.tar.gz && tar xzvf openssl-1.1.0f.tar.gz
+
 cd nginx-1.16.0
 
 ./configure --prefix=/usr/share/nginx \
@@ -57,3 +61,5 @@ cd nginx-1.16.0
             --with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
             --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
             
+make
+sudo make install

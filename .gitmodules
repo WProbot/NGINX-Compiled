@@ -1,3 +1,6 @@
 [submodule "incubator-pagespeed-ngx"]
 	path = incubator-pagespeed-ngx
 	url = git@github.com:apache/incubator-pagespeed-ngx.git
+[submodule "headers-more-nginx-module"]
+	path = headers-more-nginx-module
+	url = git@github.com:openresty/headers-more-nginx-module.git

@@ -138,6 +138,9 @@ STREAM_DEPS = src/stream/ngx_stream.h \
 STREAM_INCS = -I src/stream
 
 
+ADDON_DEPS = $(CORE_DEPS)                                                                           ../headers-more-nginx-module/src/ddebug.h                                                 ../headers-more-nginx-module/src/ngx_http_headers_more_filter_module.h                    ../headers-more-nginx-module/src/ngx_http_headers_more_headers_in.h                       ../headers-more-nginx-module/src/ngx_http_headers_more_headers_out.h                      ../headers-more-nginx-module/src/ngx_http_headers_more_headers_in.h                       ../headers-more-nginx-module/src/ngx_http_headers_more_util.h                              $(HTTP_DEPS) $(MAIL_DEPS) $(STREAM_DEPS)
+
+
 build:	binary modules manpage
 
 binary:	objs/nginx
@@ -326,6 +329,10 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/stream/ngx_stream_upstream_random_module.o \
 	objs/src/stream/ngx_stream_upstream_zone_module.o \
 	objs/src/stream/ngx_stream_ssl_preread_module.o \
+	objs/addon/src/ngx_http_headers_more_filter_module.o \
+	objs/addon/src/ngx_http_headers_more_headers_out.o \
+	objs/addon/src/ngx_http_headers_more_headers_in.o \
+	objs/addon/src/ngx_http_headers_more_util.o \
 	objs/ngx_modules.o \
 	../pcre-8.40/.libs/libpcre.a \
 	../zlib-1.2.11/libz.a
@@ -515,6 +522,10 @@ objs/nginx:	objs/src/core/nginx.o \
 	objs/src/stream/ngx_stream_upstream_random_module.o \
 	objs/src/stream/ngx_stream_upstream_zone_module.o \
 	objs/src/stream/ngx_stream_ssl_preread_module.o \
+	objs/addon/src/ngx_http_headers_more_filter_module.o \
+	objs/addon/src/ngx_http_headers_more_headers_out.o \
+	objs/addon/src/ngx_http_headers_more_headers_in.o \
+	objs/addon/src/ngx_http_headers_more_util.o \
 	objs/ngx_modules.o \
 	-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now -ldl -lpthread -lpthread -lcrypt ../pcre-8.40/.libs/libpcre.a ../openssl-1.1.0f/.openssl/lib/libssl.a ../openssl-1.1.0f/.openssl/lib/libcrypto.a -ldl -lpthread ../zlib-1.2.11/libz.a \
 	-Wl,-E
@@ -1818,6 +1829,34 @@ objs/src/stream/ngx_stream_ssl_preread_module.o:	$(CORE_DEPS) $(STREAM_DEPS) \
 		src/stream/ngx_stream_ssl_preread_module.c
 
 
+objs/addon/src/ngx_http_headers_more_filter_module.o:	$(ADDON_DEPS) \
+	../headers-more-nginx-module/src/ngx_http_headers_more_filter_module.c
+	$(CC) -c $(CFLAGS)  $(ALL_INCS) \
+		-o objs/addon/src/ngx_http_headers_more_filter_module.o \
+		../headers-more-nginx-module/src/ngx_http_headers_more_filter_module.c
+
+
+objs/addon/src/ngx_http_headers_more_headers_out.o:	$(ADDON_DEPS) \
+	../headers-more-nginx-module/src/ngx_http_headers_more_headers_out.c
+	$(CC) -c $(CFLAGS)  $(ALL_INCS) \
+		-o objs/addon/src/ngx_http_headers_more_headers_out.o \
+		../headers-more-nginx-module/src/ngx_http_headers_more_headers_out.c
+
+
+objs/addon/src/ngx_http_headers_more_headers_in.o:	$(ADDON_DEPS) \
+	../headers-more-nginx-module/src/ngx_http_headers_more_headers_in.c
+	$(CC) -c $(CFLAGS)  $(ALL_INCS) \
+		-o objs/addon/src/ngx_http_headers_more_headers_in.o \
+		../headers-more-nginx-module/src/ngx_http_headers_more_headers_in.c
+
+
+objs/addon/src/ngx_http_headers_more_util.o:	$(ADDON_DEPS) \
+	../headers-more-nginx-module/src/ngx_http_headers_more_util.c
+	$(CC) -c $(CFLAGS)  $(ALL_INCS) \
+		-o objs/addon/src/ngx_http_headers_more_util.o \
+		../headers-more-nginx-module/src/ngx_http_headers_more_util.c
+
+
 ../pcre-8.40/pcre.h:	../pcre-8.40/Makefile
 
 ../pcre-8.40/Makefile:	objs/Makefile
@@ -1834,7 +1873,7 @@ objs/src/stream/ngx_stream_ssl_preread_module.o:	$(CORE_DEPS) $(STREAM_DEPS) \
 ../openssl-1.1.0f/.openssl/include/openssl/ssl.h:	objs/Makefile
 	cd ../openssl-1.1.0f \
 	&& if [ -f Makefile ]; then $(MAKE) clean; fi \
-	&& ./config --prefix=/root/nginx-1.16.0/../openssl-1.1.0f/.openssl no-shared no-threads no-ssl3 \
+	&& ./config --prefix=/root/NGINX-Compiled/nginx-1.16.0/../openssl-1.1.0f/.openssl no-shared no-threads no-ssl3 \
 	&& $(MAKE) \
 	&& $(MAKE) install_sw LIBDIR=lib
 

@@ -2,6 +2,8 @@ sudo apt update && sudo apt upgrade -y
 
 sudo apt install build-essential -y
 
+cd nginx-1.16.0
+
 ./configure --prefix=/usr/share/nginx \
             --sbin-path=/usr/sbin/nginx \
             --modules-path=/usr/lib/nginx/modules \
@@ -51,11 +53,7 @@ sudo apt install build-essential -y
             --with-stream_ssl_module \
             --with-stream_ssl_preread_module \
             --with-debug \
-            --add-module=/ \
-            --add-module=/ \
+            --add-module=../headers-more-nginx-module \
             --with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
             --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
             
-make
-
-sudo make install

@@ -1,7 +1,23 @@
+#!/bin/bash
+
+# update and upgrade distro
 sudo apt update && sudo apt upgrade -y
 
+# install compiler
 sudo apt install build-essential -y
 
+# pull git submodules
+git submodule init
+git submodule update
+
+# compile and install mod security dependencies
+cd ModSecurity
+./build.sh
+./configure
+make
+sudo make install
+
+# nginx dependencies
 wget https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz && tar xzvf pcre-8.40.tar.gz
 wget http://www.zlib.net/zlib-1.2.11.tar.gz && tar xzvf zlib-1.2.11.tar.gz
 wget https://www.openssl.org/source/openssl-1.1.0f.tar.gz && tar xzvf openssl-1.1.0f.tar.gz
@@ -9,6 +25,7 @@ rm -rf *.tar.gz
 
 cd nginx-1.16.0
 
+# configure
 ./configure --prefix=/usr/share/nginx \
             --sbin-path=/usr/sbin/nginx \
             --modules-path=/usr/lib/nginx/modules \
@@ -57,19 +74,27 @@ cd nginx-1.16.0
             --with-stream_realip_module \
             --with-stream_ssl_module \
             --with-stream_ssl_preread_module \
-	    --add-module=../headers-more-nginx-module \
+	        --add-module=../headers-more-nginx-module \
+            --add-module=../fail2ban \
+            --add-module=../ModSecurity-nginx \
             --with-debug \
             --with-cc-opt='-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
             --with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
             
+# compile binary
 make
+
+# install binary
 sudo make install
 
+# create required binaries
 mkdir /var/lib/nginx
 mkdir /var/lib/nginx/body
 
+# create init script
 touch /etc/systemd/system/nginx.service
 
+# add init code to init script
 cat <<EOF
 [Unit]
 Description=A high performance web server and a reverse proxy server

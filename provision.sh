@@ -75,7 +75,7 @@ cd nginx-1.16.0
             --with-stream_realip_module \
             --with-stream_ssl_module \
             --with-stream_ssl_preread_module \
-	        --add-module=../headers-more-nginx-module \
+	    --add-module=../headers-more-nginx-module \
             --add-module=../fail2ban \
             --add-module=../ModSecurity-nginx \
             --with-debug \
@@ -98,33 +98,17 @@ touch /etc/systemd/system/nginx.service
 # add init code to init script
 cat <<EOF
 [Unit]
-Description=A high performance web server and a reverse proxy server
-After=network.target
+Description=A server
+After=syslog.target network.target remote-fs.target nss-lookup.target
 
 [Service]
 Type=forking
 PIDFile=/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
-ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
-ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
-ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
-TimeoutStopSec=5
-KillMode=mixed
-
-[Install]
-WantedBy=multi-user.target[Unit]
-Description=A high performance web server and a reverse proxy server
-After=network.target
-
-[Service]
-Type=forking
-PIDFile=/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx -t -q -g 'daemon on; master_process on;'
-ExecStart=/usr/sbin/nginx -g 'daemon on; master_process on;'
-ExecReload=/usr/sbin/nginx -g 'daemon on; master_process on;' -s reload
-ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid
-TimeoutStopSec=5
-KillMode=mixed
+ExecStartPre=/usr/sbin/nginx -t
+ExecStart=/usr/sbin/nginx
+ExecReload=/usr/sbin/nginx -s reload
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target

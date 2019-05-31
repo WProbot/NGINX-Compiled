@@ -6,9 +6,10 @@ sudo apt update && sudo apt upgrade -y
 # install compiler
 sudo apt install build-essential -y
 
-# pull git submodules
-git submodule init
-git submodule update
+sudo git clone git://github.com/openresty/headers-more-nginx-module.git
+sudo git clone git://github.com/SpiderLabs/ModSecurity.git
+sudo git clone git://github.com/SpiderLabs/ModSecurity-nginx.git
+sudo git clone git://github.com/fail2ban/fail2ban.git
 
 # compile and install mod security dependencies
 cd ModSecurity
@@ -87,7 +88,7 @@ make
 # install binary
 sudo make install
 
-# create required binaries
+# create required directories
 mkdir /var/lib/nginx
 mkdir /var/lib/nginx/body
 

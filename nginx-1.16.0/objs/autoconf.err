@@ -185,8 +185,8 @@ cc -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate
 ----------------------------------------
 checking for crypt()
 
-/usr/bin/ld: /tmp/cczhkEcb.o: in function `main':
-/root/nginx-1.16.0/objs/autotest.c:7: undefined reference to `crypt'
+/usr/bin/ld: /tmp/cc2shIsb.o: in function `main':
+/root/NGINX-Compiled/nginx-1.16.0/objs/autotest.c:7: undefined reference to `crypt'
 collect2: error: ld returned 1 exit status
 ----------
 
@@ -300,9 +300,9 @@ checking for statvfs()
 ----------------------------------------
 checking for dlopen()
 
-/usr/bin/ld: /tmp/ccxN11ry.o: in function `main':
-/root/nginx-1.16.0/objs/autotest.c:7: undefined reference to `dlopen'
-/usr/bin/ld: /root/nginx-1.16.0/objs/autotest.c:7: undefined reference to `dlsym'
+/usr/bin/ld: /tmp/cczOy3es.o: in function `main':
+/root/NGINX-Compiled/nginx-1.16.0/objs/autotest.c:7: undefined reference to `dlopen'
+/usr/bin/ld: /root/NGINX-Compiled/nginx-1.16.0/objs/autotest.c:7: undefined reference to `dlsym'
 collect2: error: ld returned 1 exit status
 ----------
 
@@ -627,8 +627,8 @@ objs/autotest.c:7:5: warning: implicit declaration of function 'setproctitle'; d
      setproctitle("test");;
      ^~~~~~~~~~~~
      setstate
-/usr/bin/ld: /tmp/ccrTXOWm.o: in function `main':
-/root/nginx-1.16.0/objs/autotest.c:7: undefined reference to `setproctitle'
+/usr/bin/ld: /tmp/cccnrJOr.o: in function `main':
+/root/NGINX-Compiled/nginx-1.16.0/objs/autotest.c:7: undefined reference to `setproctitle'
 collect2: error: ld returned 1 exit status
 ----------
 
@@ -660,7 +660,7 @@ checking for pwritev()
 ----------------------------------------
 checking for sys_nerr
 
-/usr/bin/ld: /tmp/ccj7qqJD.o: in function `printf':
+/usr/bin/ld: /tmp/cc1aPSgv.o: in function `printf':
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:107: warning: `sys_nerr' is deprecated; use `strerror' or `strerror_r' instead
 135
 ----------------------------------------
@@ -694,9 +694,9 @@ checking for System V shared memory
 ----------------------------------------
 checking for POSIX semaphores
 
-/usr/bin/ld: /tmp/ccSGI3sV.o: in function `main':
-/root/nginx-1.16.0/objs/autotest.c:8: undefined reference to `sem_init'
-/usr/bin/ld: /root/nginx-1.16.0/objs/autotest.c:9: undefined reference to `sem_destroy'
+/usr/bin/ld: /tmp/cc93xFQY.o: in function `main':
+/root/NGINX-Compiled/nginx-1.16.0/objs/autotest.c:8: undefined reference to `sem_init'
+/usr/bin/ld: /root/NGINX-Compiled/nginx-1.16.0/objs/autotest.c:9: undefined reference to `sem_destroy'
 collect2: error: ld returned 1 exit status
 ----------
 

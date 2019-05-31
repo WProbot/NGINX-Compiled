@@ -70,6 +70,7 @@ extern ngx_module_t  ngx_http_addition_filter_module;
 extern ngx_module_t  ngx_http_gunzip_filter_module;
 extern ngx_module_t  ngx_http_userid_filter_module;
 extern ngx_module_t  ngx_http_headers_filter_module;
+extern ngx_module_t  ngx_http_headers_more_filter_module;
 extern ngx_module_t  ngx_http_copy_filter_module;
 extern ngx_module_t  ngx_http_range_body_filter_module;
 extern ngx_module_t  ngx_http_not_modified_filter_module;
@@ -169,6 +170,7 @@ ngx_module_t *ngx_modules[] = {
     &ngx_http_gunzip_filter_module,
     &ngx_http_userid_filter_module,
     &ngx_http_headers_filter_module,
+    &ngx_http_headers_more_filter_module,
     &ngx_http_copy_filter_module,
     &ngx_http_range_body_filter_module,
     &ngx_http_not_modified_filter_module,
@@ -270,6 +272,7 @@ char *ngx_module_names[] = {
     "ngx_http_gunzip_filter_module",
     "ngx_http_userid_filter_module",
     "ngx_http_headers_filter_module",
+    "ngx_http_headers_more_filter_module",
     "ngx_http_copy_filter_module",
     "ngx_http_range_body_filter_module",
     "ngx_http_not_modified_filter_module",

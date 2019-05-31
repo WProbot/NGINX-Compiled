@@ -2,6 +2,7 @@
 
 # update and upgrade distro
 sudo apt update && sudo apt upgrade -y
+sudo apt install unzip && apt install git -y
 
 # install compiler
 sudo apt install build-essential -y

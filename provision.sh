@@ -19,6 +19,9 @@ cd ModSecurity
 make
 sudo make install
 
+# exit the ModSecurity directory
+cd ..
+
 # nginx dependencies
 sudo wget -L https://ftp.pcre.org/pub/pcre/pcre-8.40.tar.gz && tar xzvf pcre-8.40.tar.gz
 sudo wget -L https://www.zlib.net/zlib-1.2.11.tar.gz && tar xzvf zlib-1.2.11.tar.gz
